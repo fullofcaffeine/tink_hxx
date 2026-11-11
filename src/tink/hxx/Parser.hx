@@ -108,8 +108,9 @@ class Parser extends ParserBase<Position, haxe.macro.Error> {
     }
 
   function parseExpr(source:String, pos:Position, ?mayBeEmpty:Bool) {
-    source = ~/\/\*[\s\S]*?\*\//g.replace(source, '');
-    if (source.trim().length == 0)
+    // Strip comments only to decide whether the expression is empty.
+    // Haxe gets the unchanged text, so it can tell comments from string text.
+    if (~/\/\*[\s\S]*?\*\//g.replace(source, '').trim().length == 0)
       if (mayBeEmpty) return null;
       else pos.error('expected expression');
 

@@ -190,6 +190,22 @@ class RunTests {
     return asserts.done();
   }
 
+  public function jsxCommentMarkersInStrings() {
+    asserts.assert(Std.string(Plain.hxx('<div>{"a/*b*/c"}</div>')) == '[a/*b*/c]');
+    asserts.assert(Std.string(Plain.hxx("<div>{'x /* y */ z'}</div>")) == '[x /* y */ z]');
+    return asserts.done();
+  }
+
+  public function jsxCommentOnlyChildIsEmpty() {
+    asserts.assert(Std.string(Plain.hxx('<div><div>foo</div>{ /* a */ /* b */ }<div>bar</div></div>')) == '[[foo],[bar]]');
+    return asserts.done();
+  }
+
+  public function jsxCommentBetweenTokens() {
+    asserts.assert(Std.string(Plain.hxx('<div>{"a" /* plus */ + /* "b" */ "c"}</div>')) == '[ac]');
+    return asserts.done();
+  }
+
   public function entities() {
     Plain.hxx('<div>Hello, &world;</div>');
     asserts.assert(Plain.hxx('&gt;') == '>');
