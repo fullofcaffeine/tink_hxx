@@ -12,8 +12,11 @@ owner of tink_hxx; this fork only carries patches.
 
 - `maintained/<upstream version>`: the base commit plus the patches below.
   For this base, the branch is `maintained/0.25.1`.
-- Tags: `<upstream version>-caf.<n>`, for example `0.25.1-caf.1`. A tag
-  marks one exact patched commit that consumers can pin.
+- `master`: a mirror of upstream `master`. It moves only by fast-forward to
+  an upstream commit and never carries fork patches.
+- Tags: `v<upstream version>-foc.<n>`, for example `v0.25.1-foc.1`. A tag
+  marks one exact patched commit that consumers can pin. The first tag for
+  this base is `v0.25.1-foc.1`.
 - The `upstream` remote has its push URL set to `DISABLED`. Never push to
   upstream from this clone.
 
